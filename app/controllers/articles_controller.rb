@@ -12,6 +12,9 @@ class ArticlesController < ApplicationController
 
         @comment = Comment.new
         @comment.article_id = @article_id
+        @author = @article.author
+
+    
     end
 
     def new
@@ -20,6 +23,12 @@ class ArticlesController < ApplicationController
 
     def create
         @article = Article.new(article_params)
+        @author = current_user
+
+        if logged_in?
+            @article.author_id = current_user.id
+    
+        end
         
         @article.save
 
@@ -28,6 +37,16 @@ class ArticlesController < ApplicationController
 
     def destroy
         @article = Article.find(params[:id])
+        
+
+        @comments = Comment.all
+
+            @comments.each do |comm|
+                if comm.article_id == @article.id
+                    comm.destroy
+                end
+            end
+
         @article.destroy
 
         redirect_to action: "index"
@@ -45,6 +64,16 @@ class ArticlesController < ApplicationController
         flash.notice = "Article '#{@article.title}' updated!"
 
         redirect_to article_path(@article)
+    end
+
+    def change_status
+        @article = Article.find(params[:id])
+        @article.status = "Archived"
+
+        @article.save
+
+        flash.notice = "Article '#{@article.title}' is archived!"
+        redirect_to action: "index"
     end
 
 end

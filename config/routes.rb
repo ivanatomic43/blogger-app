@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   root to: 'articles#index'  
   resources :articles do
       resources :comments
+      member do 
+        get :change_status
+      end
   end
 
   resources :tags
@@ -11,4 +14,5 @@ Rails.application.routes.draw do
 
   get 'login' => 'author_sessions#new'
   get 'logout' => 'author_sessions#destroy'
+  #put 'archive' => 'article#archive', :as => :archive
 end
