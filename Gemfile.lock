@@ -76,6 +76,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.6)
+    connection_pool (2.2.5)
     crass (1.0.2)
     erubi (1.9.0)
     execjs (2.6.0)
@@ -93,6 +94,8 @@ GEM
     faraday-net_http (1.0.1)
     faraday-net_http_persistent (1.1.0)
     ffi (1.12.2)
+    figaro (1.2.0)
+      thor (>= 0.14.0, < 2)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     i18n (1.8.2)
@@ -141,6 +144,8 @@ GEM
     public_suffix (3.0.3)
     puma (3.12.4)
     rack (2.0.7)
+    rack-protection (2.1.0)
+      rack
     rack-test (0.7.0)
       rack (>= 1.0, < 3)
     rails (5.2.3)
@@ -170,6 +175,7 @@ GEM
     rake (13.0.1)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
+    redis (4.2.5)
     regexp_parser (1.6.0)
     ruby2_keywords (0.0.4)
     rubyzip (2.0.0)
@@ -183,6 +189,11 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    sidekiq (6.0.7)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      rack-protection (>= 2.0.0)
+      redis (>= 4.1.0)
     sorcery (0.16.1)
       bcrypt (~> 3.1)
       oauth (~> 0.5, >= 0.5.5)
@@ -233,6 +244,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   chromedriver-helper
   coffee-rails (~> 4.2)
+  figaro
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   paperclip
@@ -240,6 +252,7 @@ DEPENDENCIES
   rails (~> 5.2.3)
   sass-rails (~> 5.0)
   selenium-webdriver
+  sidekiq (~> 6.0.0)
   sorcery
   spring
   spring-watcher-listen (~> 2.0.0)

@@ -26,6 +26,10 @@ gem 'jbuilder', '~> 2.5'
 gem "paperclip"
 #Authentication
 gem 'sorcery'
+#Background job
+gem 'sidekiq', '~>6.0.0'
+#env
+gem 'figaro'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'

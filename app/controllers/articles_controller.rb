@@ -29,6 +29,8 @@ class ArticlesController < ApplicationController
             @article.author_id = current_user.id
     
         end
+
+        ArticleWorker.perform_async(@author.email)
         
         @article.save
 
@@ -69,9 +71,12 @@ class ArticlesController < ApplicationController
     def change_status
         @article = Article.find(params[:id])
         @article.status = "Archived"
+        
+        @author = current_user
+        HardWorker.perform_async(@author.email)
 
         @article.save
-
+        
         flash.notice = "Article '#{@article.title}' is archived!"
         redirect_to action: "index"
     end
